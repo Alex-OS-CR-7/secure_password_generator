@@ -8,7 +8,7 @@ uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 punctuation = '!#$%&*+-=?@^_'
 
-hard_punctuation = 'il1Lo0O'
+hard_punctuation = ['i', 'l', '1', 'L', 'o', '0', 'O']
 
 chars = []
 
@@ -25,32 +25,32 @@ while True:
     while True:
         password_counter = int(input('Введите количество паролей, которые необходимо сгенерировать: '))
         if password_counter == 0:
-            print('Количество паролей не может быть равно нулю! Задайте число больше 0.')
+            print('Количество паролей не может быть равно нулю! Задайте число больше 0. ')
             continue
         else:
             break
     while True:
         password_lenght = int(input('Введите желаемую длинну пароля. Минимальная длинна пароля равна "8": '))
         if password_lenght < 8:
-                print('Укажите длинну пароля не менее 8 символов!')
+                print('Укажите длинну пароля не менее 8 символов! ')
                 continue
         else:
             break
     while True:
         symbol_cnt_check = 0
-        user_input = input('Пароль должен содержать цифры? Напишите "Да" или "Нет"')
+        user_input = input('Пароль должен содержать цифры? Напишите "Да" или "Нет" ')
         if is_valid_answer(user_input):
             chars.extend(digits)
             symbol_cnt_check += 1
-        user_input = input('Пароль должен содержать строчные буквы? Напишите "Да" или "Нет"')
+        user_input = input('Пароль должен содержать строчные буквы? Напишите "Да" или "Нет" ')
         if is_valid_answer(user_input):
             chars.extend(lowercase_letters)
             symbol_cnt_check += 1
-        user_input = input('Пароль должен содержать прописные буквы? Напишите "Да" или "Нет"')
+        user_input = input('Пароль должен содержать прописные буквы? Напишите "Да" или "Нет" ')
         if is_valid_answer(user_input):
             chars.extend(uppercase_letters)
             symbol_cnt_check += 1
-        user_input = input('Пароль должен содержать специальные символы? Напишите "Да" или "Нет"')
+        user_input = input('Пароль должен содержать специальные символы? Напишите "Да" или "Нет" ')
         if is_valid_answer(user_input):
             chars.extend(punctuation)
             symbol_cnt_check += 1
@@ -60,4 +60,16 @@ while True:
             print('Необходимо указать хотя бы один набор символов для генерации пароля. Попробуйте еще раз.')
             continue
     break
-print(chars)
+user_input = input('Нужно исключить неоднозначные символы "il1Lo0O"? ')
+if is_valid_answer(user_input):
+    for i in hard_punctuation:
+        if i in chars:
+            chars.remove(i)
+
+def generate_password():
+    password = []
+    for i in range(password_lenght):
+        password.append(r.choice(chars))
+    return ''.join(password)
+
+print(generate_password())
