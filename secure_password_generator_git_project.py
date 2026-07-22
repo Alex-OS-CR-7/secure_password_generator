@@ -8,6 +8,8 @@ uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 punctuation = '!#$%&*+-=?@^_'
 
+hard_punctuation = 'il1Lo0O'
+
 chars = []
 
 def is_valid_answer(text):
@@ -34,15 +36,28 @@ while True:
                 continue
         else:
             break
-    user_input = input('Пароль должен содержать цифры? Напишите "Да" или "Нет"')
-    if is_valid_answer(user_input):
-        chars.extend(digits)
-    user_input = input('Пароль должен содержать строчные буквы? Напишите "Да" или "Нет"')
-    if is_valid_answer(user_input):
-        chars.extend(lowercase_letters)
-    user_input = input('Пароль должен содержать прописные буквы? Напишите "Да" или "Нет"')
-    if is_valid_answer(user_input):
-        chars.extend(uppercase_letters)
-    user_input = input('Пароль должен содержать специальные символы? Напишите "Да" или "Нет"')
-    if is_valid_answer(user_input):
-        chars.extend(punctuation)
+    while True:
+        symbol_cnt_check = 0
+        user_input = input('Пароль должен содержать цифры? Напишите "Да" или "Нет"')
+        if is_valid_answer(user_input):
+            chars.extend(digits)
+            symbol_cnt_check += 1
+        user_input = input('Пароль должен содержать строчные буквы? Напишите "Да" или "Нет"')
+        if is_valid_answer(user_input):
+            chars.extend(lowercase_letters)
+            symbol_cnt_check += 1
+        user_input = input('Пароль должен содержать прописные буквы? Напишите "Да" или "Нет"')
+        if is_valid_answer(user_input):
+            chars.extend(uppercase_letters)
+            symbol_cnt_check += 1
+        user_input = input('Пароль должен содержать специальные символы? Напишите "Да" или "Нет"')
+        if is_valid_answer(user_input):
+            chars.extend(punctuation)
+            symbol_cnt_check += 1
+        if symbol_cnt_check > 0:
+            break
+        else:
+            print('Необходимо указать хотя бы один набор символов для генерации пароля. Попробуйте еще раз.')
+            continue
+    break
+print(chars)
