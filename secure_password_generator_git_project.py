@@ -8,7 +8,7 @@ uppercase_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 punctuation = '!#$%&*+-=?@^_'
 
-hard_punctuation = ['i', 'l', '1', 'L', 'o', '0', 'O']
+hard_chars = ['i', 'l', '1', 'L', 'o', '0', 'O']
 
 chars = []
 
@@ -30,8 +30,8 @@ while True:
         else:
             break
     while True:
-        password_lenght = int(input('Введите желаемую длинну пароля. Минимальная длинна пароля равна "8": '))
-        if password_lenght < 8:
+        password_length = int(input('Введите желаемую длинну пароля. Минимальная длинна пароля равна "8": '))
+        if password_length < 8:
                 print('Укажите длинну пароля не менее 8 символов! ')
                 continue
         else:
@@ -62,14 +62,15 @@ while True:
     break
 user_input = input('Нужно исключить неоднозначные символы "il1Lo0O"? ')
 if is_valid_answer(user_input):
-    for i in hard_punctuation:
+    for i in hard_chars:
         if i in chars:
             chars.remove(i)
 
 def generate_password():
     password = []
-    for i in range(password_lenght):
+    for i in range(password_length):
         password.append(r.choice(chars))
     return ''.join(password)
 
-print(generate_password())
+for i in range(password_counter):
+    print(generate_password())
