@@ -10,10 +10,14 @@ punctuation = '!#$%&*+-=?@^_'
 
 hard_chars = ['i', 'l', '1', 'L', 'o', '0', 'O']
 
-chars = []
-
 def is_valid_answer(text):
     if text.lower() in ('да', 'yes'):
+        return True
+    else:
+        return False
+
+def is_valid_num(text):
+    if text.isdigit():
         return True
     else:
         return False
@@ -22,15 +26,28 @@ print(
     'Добро пожаловать в программу "Генератор безопасных паролей"',
 )
 while True:
+    chars = []
     while True:
-        password_counter = int(input('Введите количество паролей, которые необходимо сгенерировать: '))
+        password_counter = input('Введите количество паролей, которые необходимо сгенерировать: ')
+        if is_valid_num(password_counter) is False:
+            print('Введите положительное целое число!')
+            continue
+        else:
+            password_counter = int(password_counter)
+
         if password_counter == 0:
             print('Количество паролей не может быть равно нулю! Задайте число больше 0. ')
             continue
         else:
             break
     while True:
-        password_length = int(input('Введите желаемую длинну пароля. Минимальная длинна пароля равна "8": '))
+        password_length = input('Введите желаемую длинну пароля. Минимальная длинна пароля равна "8": ')
+        if is_valid_num(password_length) is False:
+                print('Введите положительное целое число!')
+                continue
+        else:
+            password_length = int(password_length)
+        
         if password_length < 8:
                 print('Укажите длинну пароля не менее 8 символов! ')
                 continue
